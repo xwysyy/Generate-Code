@@ -27,8 +27,10 @@ def ask(question, model):
         model=model,
     )
     code = chat_completion.choices[0].message.content
-    cpp_code = code.split('```cpp\n')[1].split('```')[0]
-    return cpp_code
+    code = '/*\n\n' + code + '\n\n*/'
+    code = code.replace('```cpp', '*/\n')
+    code = code.replace('```', '\n/*')
+    return code
 
 
 def get_code(problem):
@@ -37,8 +39,9 @@ def get_code(problem):
     
     def save_code(model):
         cpp_code = ask(problem, model)
-        with open(path + '/' + model + '.cpp', 'w') as f:
-            f.write(cpp_code)
+        with open(path + '/' + model + '.cpp', 'w', encoding='utf-8') as f:
+            for chunk in [cpp_code[i:i+1024] for i in range(0, len(cpp_code), 1024)]:
+                f.write(chunk)
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         executor.map(save_code, model_list)
