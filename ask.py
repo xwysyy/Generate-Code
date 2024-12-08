@@ -1,6 +1,6 @@
 from openai import OpenAI
-import os
 from dotenv import load_dotenv
+import os
 import concurrent.futures
 
 load_dotenv()
@@ -27,7 +27,7 @@ def ask(question, model):
         model=model,
     )
     code = chat_completion.choices[0].message.content
-    cpp_code=code.split('```cpp\n')[1].split('```')[0]
+    cpp_code = code.split('```cpp\n')[1].split('```')[0]
     return cpp_code
 
 
