@@ -45,3 +45,6 @@ def get_code(problem):
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         executor.map(save_code, model_list)
+
+def test():
+    print(1)
