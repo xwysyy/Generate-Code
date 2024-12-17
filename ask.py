@@ -2,7 +2,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 import concurrent.futures
-
+from init import model_path
 load_dotenv()
 
 api_key = os.getenv("API_KEY")
@@ -13,7 +13,7 @@ client = OpenAI(
     base_url = base_url
 )
 
-with open('model.txt', 'r') as f:
+with open(model_path, 'r') as f:
     model_list = f.read().splitlines()
     
 def ask(question, model):
@@ -45,6 +45,3 @@ def get_code(problem):
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         executor.map(save_code, model_list)
-
-problem = '生成判断数组的数是否唯一,请给出cpp代码'
-get_code(problem)
