@@ -1,10 +1,12 @@
 # deepseek官方api
+# https://platform.deepseek.com
 deepseek-chat:
   enabled: false
   api_key: 'deepseek_api_key'
   base_url: 'https://api.deepseek.com'
 
 # 阿里云api
+# https://bailian.console.aliyun.com/
 qwen-max:
   enabled: false
   api_key: 'qwen_api_key'
@@ -21,6 +23,7 @@ qwen-coder-plus:
   base_url: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
 
 # 益丰接口平台api
+# https://api.ephone.ai/
 o1-mini:
   enabled: false
   api_key: 'ephone_api_key'
@@ -47,6 +50,7 @@ gemini-1.5-pro:
   base_url: 'https://api.ephone.ai/v1/'
 
 # AGICTO大模型调用基座api
+# https://agicto.com/
 # gpt-4o-mini:
 #   enabled: false
 #   api_key: 'agicto_api_key'
