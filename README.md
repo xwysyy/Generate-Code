@@ -1,4 +1,5 @@
-配置example.env文件，删去前缀
+在init/modules.yaml中配置需要的大模型
+在.env中配置api_key
 
 运行ask.py文件，输入问题，在code目录下生成问题的代码文件
 

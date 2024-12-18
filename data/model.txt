@@ -1,6 +1,0 @@
-generalv3.5
-Baichuan2-53B
-qwq-32b-preview
-tencent-ChatPro
-gemini-1.5-pro
-glm-4-flash
