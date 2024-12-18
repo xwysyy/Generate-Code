@@ -19,7 +19,7 @@ def ask(question, model, api_key, base_url):
     client = OpenAI(api_key=api_key, base_url=base_url)
     chat_completion = client.chat.completions.create(
         messages=[
-            {"role": "system", "content": "You are a C++ programmer."},
+            {"role": "system", "content": "You are a C++ programmer, please just give me the code to solve the problem."},
             {"role": "user","content": question}
         ],
         model=model,
@@ -35,6 +35,9 @@ def get_code(problem):
     if not os.path.exists(path):
         os.makedirs(path)
     def save_code(model):
+        enaled = models_config[model]['enabled']
+        if not enaled:
+            return
         api_key = models_config[model]['api_key']
         if api_key is None:
             raise ValueError('API Key not found')
