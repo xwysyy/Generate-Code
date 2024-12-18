@@ -1,19 +1,63 @@
+# deepseek官方api
 deepseek-chat:
   enabled: false
   api_key: 'deepseek_api_key'
   base_url: 'https://api.deepseek.com'
 
+# 阿里云api
 qwen-max:
-  enabled: true
+  enabled: false
   api_key: 'qwen_api_key'
   base_url: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
 
 qwen-plus:
-  enabled: true
+  enabled: false
   api_key: 'qwen_api_key'
   base_url: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
 
 qwen-coder-plus:
-  enabled: true
+  enabled: false
   api_key: 'qwen_api_key'
   base_url: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
+
+# 益丰接口平台api
+o1-mini:
+  enabled: false
+  api_key: 'ephone_api_key'
+  base_url: 'https://api.ephone.ai/v1/'
+
+gpt-4o:
+  enabled: false
+  api_key: 'ephone_api_key'
+  base_url: 'https://api.ephone.ai/v1/'
+
+gpt-4o-mini:
+  enabled: true
+  api_key: 'ephone_api_key'
+  base_url: 'https://api.ephone.ai/v1/'
+
+claude-3-5-sonnet-20241022:
+  enabled: false
+  api_key: 'ephone_api_key'
+  base_url: 'https://api.ephone.ai/v1/'
+
+gemini-1.5-pro:
+  enabled: false
+  api_key: 'ephone_api_key'
+  base_url: 'https://api.ephone.ai/v1/'
+
+# AGICTO大模型调用基座api
+# gpt-4o-mini:
+#   enabled: false
+#   api_key: 'agicto_api_key'
+#   base_url: 'https://api.agicto.cn/v1'
+
+# gpt-4o:
+#   enabled: false
+#   api_key: 'agicto_api_key'
+#   base_url: 'https://api.agicto.cn/v1'
+
+# gemini-pro:
+#   enabled: false
+#   api_key: 'agicto_api_key'
+#   base_url: 'https://api.agicto.cn/v1'

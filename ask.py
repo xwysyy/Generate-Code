@@ -8,21 +8,20 @@ from init import model_path
 load_dotenv()
 with open(model_path, 'r', encoding='utf-8') as file:
     models_config = yaml.load(file, Loader=yaml.FullLoader)
-models_list = list(models_config.keys())
-
-print(models_list)
+models_list = [model for model in list(models_config.keys()) if models_config[model]['enabled']]
+print(f'Enabled models: {models_list}')
 
 def ask(question, model, api_key, base_url):
     api_key = os.getenv(api_key)
     if api_key is None:
         raise ValueError('API Key not found')
-    client = OpenAI(api_key=api_key, base_url=base_url)
+    client = OpenAI(api_key = api_key, base_url = base_url)
     chat_completion = client.chat.completions.create(
-        messages=[
+        messages = [
             {"role": "system", "content": "You are a C++ programmer, please just give me the code to solve the problem."},
             {"role": "user","content": question}
         ],
-        model=model,
+        model = model,
     )
     code = chat_completion.choices[0].message.content
     code = '/*\n\n' + code + '\n\n*/'
