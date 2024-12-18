@@ -30,7 +30,7 @@ def ask(question, model, api_key, base_url):
     return code
 
 def get_code(problem):
-    path = 'code/' + '1'
+    path = 'code/' + '2'
     if not os.path.exists(path):
         os.makedirs(path)
     def save_code(model):

@@ -1,24 +1,24 @@
 # deepseek官方api
 # https://platform.deepseek.com
 deepseek-chat:
-  enabled: false
+  enabled: true
   api_key: 'deepseek_api_key'
   base_url: 'https://api.deepseek.com'
 
 # 阿里云api
 # https://bailian.console.aliyun.com/
 qwen-max:
-  enabled: false
+  enabled: true
   api_key: 'qwen_api_key'
   base_url: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
 
 qwen-plus:
-  enabled: false
+  enabled: true
   api_key: 'qwen_api_key'
   base_url: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
 
 qwen-coder-plus:
-  enabled: false
+  enabled: true
   api_key: 'qwen_api_key'
   base_url: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
 

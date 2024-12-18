@@ -1,6 +1,13 @@
-Given two integer arrays nums1 and nums2, return the maximum length of a subarray that appears in both arrays.
+有 N 件物品和一个容量是 V 的背包。每件物品只能使用一次。
 
-Constraints:
+第i件物品的体积是vi，价值是 wi
+​
+求解将哪些物品装入背包，可使这些物品的总体积不超过背包容量，且总价值最大。输出最大价值。
 
-1 <= nums1.length, nums2.length <= 1000
-0 <= nums1[i], nums2[i] <= 100
+0<N,V≤1000
+0<vi,wi≤1000
+
+空间限制：40KB
+时间限制：1s
+
+请尽可能优化空间

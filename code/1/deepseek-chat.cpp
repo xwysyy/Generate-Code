@@ -1,56 +1,73 @@
 /*
 
-To solve the problem of finding the maximum length of a subarray that appears in both given arrays `nums1` and `nums2`, we can use a dynamic programming approach. The idea is to create a 2D DP table where `dp[i][j]` represents the maximum length of a common subarray ending at `nums1[i-1]` and `nums2[j-1]`.
-
-Here's the step-by-step approach:
-
-1. **Initialize a DP table**: Create a 2D array `dp` of size `(m+1) x (n+1)` where `m` is the length of `nums1` and `n` is the length of `nums2`. The extra row and column are for base cases where one of the arrays is empty.
-
-2. **Fill the DP table**:
-   - If `nums1[i-1] == nums2[j-1]`, then `dp[i][j] = dp[i-1][j-1] + 1`. This means that the current elements match, so we add 1 to the length of the common subarray ending at the previous elements.
-   - If `nums1[i-1] != nums2[j-1]`, then `dp[i][j] = 0` because the current elements do not match, so the common subarray length resets to 0.
-
-3. **Track the maximum length**: While filling the DP table, keep track of the maximum value encountered.
-
-4. **Return the maximum length**: After filling the DP table, the maximum value will be the length of the longest common subarray.
-
-Here's the C++ implementation of the above approach:
+这是一个经典的0-1背包问题，可以使用动态规划来解决。以下是C++代码实现：
 
 */
 
+#include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
-int findLength(vector<int>& nums1, vector<int>& nums2) {
-    int m = nums1.size();
-    int n = nums2.size();
-    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
-    int maxLen = 0;
+int main() {
+    int N, V;
+    cin >> N >> V;
+    vector<int> v(N), w(N);
+    for (int i = 0; i < N; ++i) {
+        cin >> v[i] >> w[i];
+    }
 
-    for (int i = 1; i <= m; ++i) {
-        for (int j = 1; j <= n; ++j) {
-            if (nums1[i - 1] == nums2[j - 1]) {
-                dp[i][j] = dp[i - 1][j - 1] + 1;
-                maxLen = max(maxLen, dp[i][j]);
-            }
+    vector<int> dp(V + 1, 0);
+
+    for (int i = 0; i < N; ++i) {
+        for (int j = V; j >= v[i]; --j) {
+            dp[j] = max(dp[j], dp[j - v[i]] + w[i]);
         }
     }
 
-    return maxLen;
+    cout << dp[V] << endl;
+    return 0;
 }
 
 /*
 
-### Explanation:
-- **Initialization**: We initialize a 2D vector `dp` with `(m+1) x (n+1)` dimensions, all set to 0.
-- **DP Table Filling**: We iterate through each element of `nums1` and `nums2`. If the current elements match, we update `dp[i][j]` based on the previous diagonal value `dp[i-1][j-1]`. We also update `maxLen` if the current `dp[i][j]` is greater than the previously recorded `maxLen`.
-- **Result**: After filling the DP table, `maxLen` contains the length of the longest common subarray.
+### 代码解释：
+1. **输入部分**：
+   - `N` 是物品的数量，`V` 是背包的容量。
+   - `v[i]` 和 `w[i]` 分别表示第 `i` 件物品的体积和价值。
 
-### Complexity:
-- **Time Complexity**: O(m * n), where `m` and `n` are the lengths of `nums1` and `nums2` respectively.
-- **Space Complexity**: O(m * n) for the DP table.
+2. **动态规划数组 `dp`**：
+   - `dp[j]` 表示容量为 `j` 的背包所能装下的最大价值。
+   - 初始时，`dp[j]` 都为 0，表示没有任何物品时，背包的最大价值为 0。
 
-This approach efficiently finds the maximum length of a common subarray between the two given arrays.
+3. **动态规划过程**：
+   - 对于每个物品 `i`，我们尝试将其放入背包中。
+   - 对于每个容量 `j`，如果 `j >= v[i]`，则可以选择放入物品 `i`，此时 `dp[j]` 更新为 `dp[j - v[i]] + w[i]`，即放入物品 `i` 后的最大价值。
+   - 由于每个物品只能使用一次，所以我们从大到小遍历容量 `j`，以避免重复放入同一个物品。
+
+4. **输出结果**：
+   - 最终 `dp[V]` 就是容量为 `V` 的背包所能装下的最大价值。
+
+### 时间复杂度：
+- 外层循环遍历物品，内层循环遍历容量，因此时间复杂度为 `O(N * V)`。
+
+### 空间复杂度：
+- 使用了一维数组 `dp`，空间复杂度为 `O(V)`，满足题目要求的空间限制。
+
+### 示例输入输出：
+
+/*
+输入：
+4 5
+1 2
+2 4
+3 4
+4 5
+
+输出：
+8
+
+/*
+
+在这个例子中，选择第2件和第3件物品（体积分别为2和3，价值分别为4和4），总价值为8，是最大值。
 
 */

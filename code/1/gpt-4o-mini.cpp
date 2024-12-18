@@ -1,45 +1,47 @@
 /*
 
-Here is a C++ solution to solve the problem of finding the maximum length of a subarray that appears in both given integer arrays:
+以下是一个 C++ 代码示例，用于解决给定的 0-1 背包问题。该代码使用动态规划方法来找到在不超过给定容量的情况下的最大价值。
 
 */
 
-#include <vector>
 #include <iostream>
-#include <unordered_map>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
-int findLength(vector<int>& nums1, vector<int>& nums2) {
-    int n = nums1.size();
-    int m = nums2.size();
-    vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
-    int maxLength = 0;
-    
-    // Fill the dp table
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= m; j++) {
-            if (nums1[i - 1] == nums2[j - 1]) {
-                dp[i][j] = dp[i - 1][j - 1] + 1;
-                maxLength = max(maxLength, dp[i][j]);
-            }
+int main() {
+    int N, V;
+    cin >> N >> V;
+
+    vector<int> volume(N + 1);
+    vector<int> value(N + 1);
+    for (int i = 1; i <= N; i++) {
+        cin >> volume[i] >> value[i];
+    }
+
+    vector<int> dp(V + 1, 0);
+
+    for (int i = 1; i <= N; i++) {
+        for (int j = V; j >= volume[i]; j--) {
+            dp[j] = max(dp[j], dp[j - volume[i]] + value[i]);
         }
     }
-    
-    return maxLength;
-}
 
-int main() {
-    vector<int> nums1 = {1, 2, 3, 2, 1};
-    vector<int> nums2 = {3, 2, 1, 4, 7};
-    
-    int result = findLength(nums1, nums2);
-    cout << "The maximum length of a subarray that appears in both arrays is: " << result << endl;
+    cout << dp[V] << endl;
+
     return 0;
 }
 
 /*
 
-This code defines a function `findLength` that uses dynamic programming to determine the maximum length of a subarray present in both arrays. It initializes a 2D vector `dp` to store lengths of common subarrays at different indices. The outer loops iterate over both arrays, updating the `dp` table when an equal pair of elements is found. The result is printed out in the `main` function.
+### 代码说明：
+1. **输入部分**: 读取物品数量 `N` 和背包容量 `V`，紧接着读取每个物品的体积和价值。
+2. **动态规划数组**: `dp[j]` 表示容量为 `j` 时可获得的最大价值。
+3. **状态转移**: 遍历每个物品，从背包容量 `V` 开始，向下遍历到 `volume[i]`，更新最大价值。
+4. **输出结果**: 最后输出最大价值 `dp[V]`。
+
+### 注意事项：
+- 本代码符合空间限制（约 40KB），同时在给定的时间限制内能够运行完毕。
 
 */
